@@ -12,5 +12,9 @@ export class AppComponent {
   getNewestComic() {
 
   }
+
+  getComicViaSearch() {
+
+  }
 }
 
