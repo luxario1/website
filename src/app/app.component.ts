@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -7,14 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'website';
-  state: boolean =true;
+  state: boolean = true;
 
   getNewestComic() {
 
   }
 
-  getComicViaSearch() {
+  getComicViaSearch(queryName: any) {
+    console.log(queryName);
+  }
 
+  resetQueryField(form: NgForm) {
+    form.resetForm();
   }
 }
 
