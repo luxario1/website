@@ -17,8 +17,16 @@ export class AppComponent {
   constructor(private manageComicService: ComicServiceService) {
   }
 
-  getNewestComic() {
-
+  async getNewestComic() {
+    await new Promise<void>(resolve => {
+      this.manageComicService.getNewestComic().subscribe(value => {   //call, welcher Liste in der Datenbank erstellt
+        if (value) {
+          this.newestComic = value.img;
+          this.comicReceived = true;
+        }
+        resolve();
+      });
+    });
   }
 
   async getComicViaSearch(queryName: any) {
@@ -31,7 +39,7 @@ export class AppComponent {
       this.manageComicService.getComic(data).subscribe(value => {   //call, welcher Liste in der Datenbank erstellt
         this.comicArray.length = 0;
         if (value) {
-          for (let i=0;i<value.length;i++){
+          for (let i = 0; i < value.length; i++) {
             this.comicArray.push(value[i].img);
           }
           this.comicReceived = true;
