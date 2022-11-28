@@ -9,9 +9,8 @@ export class ComicServiceService {
 
   //private host: string = `${window.location.protocol}//${window.location.hostname}`;
 
-  urlGetComic: any = `http://localhost/website/getComics.php`;
-  urlGetNewestComic: any = `http://localhost/website/getNewestComic.php`;
-  //urlGetComic: any = `https://xkcd.com/2054/info.0.json`;
+  urlGetComic: any = `http://34.78.156.212/getComics.php`;
+  urlGetNewestComic: any = `https://xkcd.com/info.0.json`;
 
   constructor(private http: HttpClient) {}
 
