@@ -7,10 +7,10 @@ import {Observable} from "rxjs";
 })
 export class ComicServiceService {
 
-  //private host: string = `${window.location.protocol}//${window.location.hostname}`;
+  private host: string = `${window.location.protocol}//${window.location.hostname}`;
 
-  urlGetComic: any = `http://34.78.156.212/getComics.php`;
-  urlGetNewestComic: any = `https://xkcd.com/info.0.json`;
+  urlGetComic: any = `${this.host}/getComics.php`;
+  urlGetNewestComic: any = `${this.host}/getNewestComic.php`;
 
   constructor(private http: HttpClient) {}
 

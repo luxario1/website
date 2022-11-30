@@ -1,19 +1,20 @@
-<div class="container" style="margin-top: 250px">
+<div class="container">
   <h1 style="color: white" class="d-flex justify-content-center">Welcome to XKCD-Comics!</h1><br>
   <div class="card text-center">
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link active" *ngIf="state" aria-current="true" href="#">Search Comic</a>
+          <a class="nav-link active" *ngIf="state" aria-current="true">Search Comic</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="!state" (click)="state=true" aria-current="true" href="#">Search Comic</a>
+          <a class="nav-link" *ngIf="!state" (click)="state=true" aria-current="true">Search Comic</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" *ngIf="!state" href="#">Newest Comic</a>
+          <a class="nav-link active" *ngIf="!state">Newest Comic</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" *ngIf="state" (click)="state=false; getNewestComic()" href="#">Newest Comic</a>
+        <li class="nav-item" data-bs-toggle="modal"
+            data-bs-target="#modalForNewestComic">
+          <a class="nav-link" *ngIf="state" (click)="state=false; getNewestComic()">Newest Comic</a>
         </li>
       </ul>
     </div>
@@ -26,7 +27,7 @@
             <input name="queryName" type="search" class="form-control" placeholder="Search" aria-label="Search"
                    aria-describedby="search-addon" autocomplete="off" ngModel required>
             <button type="submit" class="btn btn-outline-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalCenter">search
+                    data-bs-target="#modalForComicQuery">search
             </button>
           </div>
         </form>
@@ -38,15 +39,17 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade" id="modalForComicQuery" tabindex="-1" aria-labelledby="modalForComicQueryTitle"
+     data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Results:</h1>
-        <button (click)="this.comicArray.length = 0;this.comicReceived=false;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="modalForComicQueryTitle">Results:</h1>
+        <button (click)="this.comicArray.length = 0;this.comicReceived=false;" type="button" class="btn-close"
+                data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" *ngIf="comicReceived">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img [src]="this.comicArray[0]" class="d-block w-100" alt="img"/>
@@ -55,11 +58,11 @@
               <img [src]="item" class="d-block w-100" [alt]="i"/>
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true" style="color: #FFC107"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -69,7 +72,9 @@
         <p>404 - Not Found!</p>
       </div>
       <div class="modal-footer">
-        <button (click)="this.comicArray.length = 0; this.comicReceived=false;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button (click)="this.comicArray.length = 0; this.comicReceived=false;" type="button" class="btn btn-secondary"
+                data-bs-dismiss="modal">Close
+        </button>
       </div>
     </div>
   </div>

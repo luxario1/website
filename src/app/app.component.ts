@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ComicServiceService} from "../services/comic-service.service";
-import {emitDistinctChangesOnlyDefaultValue} from "@angular/compiler";
 
 @Component({
   selector: 'app-root',
@@ -21,8 +20,8 @@ export class AppComponent {
   async getNewestComic() {
     await new Promise<void>(resolve => {
       this.manageComicService.getNewestComic().subscribe(value => {
-        if (value) {
-          this.newestComic = value.img;
+        if (value && value.length != 0) {
+          this.newestComic = value[0].img;
           this.comicReceived = true;
         }
         resolve();
@@ -31,7 +30,6 @@ export class AppComponent {
   }
 
   async getComicViaSearch(queryName: any) {
-    console.log(queryName);
 
     let data = {
       'query': queryName
